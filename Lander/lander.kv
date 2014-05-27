@@ -1,0 +1,81 @@
+#:kivy 1.8
+
+<LanderGame>
+	ship: ship
+	surface: surface
+	fuel_level_lbl: fuel_level_val
+	
+	canvas: 
+		Color: 
+			rgb: (0.75, 0.75, 0.188)
+		Rectangle:
+			pos: 0, 0
+			size: self.width, self.height
+			
+	Label:
+		id: fuel_level_text
+		pos: root.width * 0.025, root.height * 0.85
+		text: "Fuel Level:"
+		color: 0.25, 0.25, 0, 1
+		
+	Label:
+		id: fuel_level_val
+		pos: root.width * 0.025, root.height * 0.82
+		text: str(root.ship.get_fuel_level())
+		color: 0.25, 0.25, 0, 1
+			
+	Button:
+		id: thrust_up
+		pos: root.width * 3 / 4, root.height * 3 / 4
+		size: 30, 30
+		on_press: root.ship.set_thrust_on()
+		on_release: root.ship.set_thrust_off()
+		
+	Button:
+		id: thrust_right
+		pos: root.width * 3 / 3.79, root.height * 3 / 4.25
+		size: 30, 30
+		on_press: root.ship.set_side_thrust_right_on()
+		on_release: root.ship.set_side_thrust_right_off()
+		
+	Button:
+		id: thrust_left
+		pos: root.width * 3 / 4.21, root.height * 3 / 4.25
+		size: 30, 30
+		on_press: root.ship.set_side_thrust_left_on()
+		on_release: root.ship.set_side_thrust_left_off()
+			
+	Surface:
+		id: surface
+		ship: self.parent.ship
+		x: root.x
+		
+	Ship:
+		id: ship
+		pos: root.center_x, root.top - self.height
+		
+			
+			
+			
+<Surface>
+	game: root
+	size: 1028, 50
+	size_hint_y: 1
+	canvas:
+		Color:
+			rgb: (0, 0, 0)
+		Rectangle:
+			pos: self.pos
+			size: self.size
+			
+<Ship>
+	size: 30, 44
+	canvas:
+		Color:
+			rgb: 0, 0, 0
+		Rectangle:
+			pos: self.pos
+			size: self.size
+			source: "lander.png"
+			
+			
